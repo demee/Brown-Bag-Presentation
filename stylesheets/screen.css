@@ -60,9 +60,7 @@ blockquote, q {
 	font-weight: normal;
 }
 /* ---------------------------------- Default styles -------------------------------------------- */
-body {
-	background: #1a1f1e url(../images/structure/bg-body.png);
-	color: #e3dfba;
+body {	
 	font: 24px/36px Helvetica, Arial, Sans-Serif;
 }
 
@@ -79,10 +77,9 @@ h2, h3, h4, h5 {
 	font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-h2 {
-	color: #6cbdb5;
-	font-size: 60px;
-	line-height: 60px;
+h2 {	
+	font-size: 80px;
+    margin-bottom: 20px; 
 }
 
 a, a:link {
@@ -104,7 +101,7 @@ ul {
 }
 
 li {
-	border-bottom: 1px solid rgba(147,204,198,0.2);
+	border-bottom: 1px solid;
 	padding: 15px 0;
 }
 
@@ -119,9 +116,7 @@ li:last-child {
 
 /* System styles */
 
-#header, #footer {
-	background: rgba(147,204,198,0.5);
-	color: #fff;
+#header, #footer {	
 	font-size: 14px;
 	line-height: 14px;
 	position: fixed;
@@ -139,7 +134,7 @@ li:last-child {
 }
 
 #header .container, #footer .container {
-	padding: 20px;
+	padding: 5px;
 }
 
 button {
@@ -153,14 +148,14 @@ label {
 }
 
 #slides {
-	top: 40px;
-	position: relative;
+	top: 30px;
+	position: relative;	
 }
 
 .slide {
-	padding: 100px;
-	position:absolute;
-	width:85%;
+    margin: 2% 5%;
+    position: absolute;
+    width: 90%;	
 }
 
 .js .slide {
@@ -178,11 +173,11 @@ label {
 }
 
 .nav-pager {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .nav-prev-next {
-    margin-top: 5px;
+    margin-top: 0px;
 }
 
 .nav-pager li, .nav-prev-next li {
@@ -206,19 +201,10 @@ label {
 }
 
 .nav-pager a, .nav-prev-next a {
-	background: #93ccc6;
-	color: rgba(26,31,30,0.5);
 	padding: 5px;
 	text-decoration: none;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
 }
 
-.nav-pager .current a, .nav-prev-next a:hover {
-	background: #6cbdb5;
-	color: #fff;
-}
 
 .nav-prev-next {
 	right: 20px;

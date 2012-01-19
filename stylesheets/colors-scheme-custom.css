@@ -1,0 +1,36 @@
+body {  
+    color: #292929;
+    background: #FFFDF6;  
+}
+
+h2 {
+    color: #787878;
+	background: #ACB867;
+	text-shadow: 2px 2px 2px #FFFDF6, 2px 2px 2px #FFFDF6, 0px 0px 4px #fff;
+}
+
+li {
+    border-bottom: 1px solid #62B095;
+}
+
+/* ----------------- */ 
+#header, #footer {
+    background: #2B702F;
+    color: #FFFDF6;
+} 
+
+.nav-pager a, .nav-prev-next a {
+    background: #ACB867;
+    color: #FFFDF6;
+}
+
+.nav-pager .current a, .nav-prev-next a:hover {
+    background: #ACB867;
+    color: #292929;
+}
+
+ /* tone  , shadow, bg    , grdiet, main   */ 
+ /* D13140, D1A079, FFFDF6, 787878, 292929 */ /* red   scheme */ 
+ /* 2B702F, ACB867, FFFDF6, 787878, 292929 */ /* green scheme */ 
+ /* 1A5B70, 62B095, FFFDF6, 787878, 292929 */ /* blue  scheme */
+ 

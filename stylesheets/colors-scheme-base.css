@@ -1,0 +1,30 @@
+body {	
+	color: #e3dfba;
+	background: #1a1f1e url(../images/structure/bg-body.png);  
+}
+
+h2 {
+	color: #6cbdb5;
+}
+
+li {
+	border-bottom: 1px solid rgba(147,204,198,0.2);
+}
+
+/* ----------------- */ 
+#header, #footer {
+	background: rgba(147,204,198,0.5);
+    color: #fff;
+} 
+
+.nav-pager a, .nav-prev-next a {
+	background: #93ccc6;
+    color: rgba(26,31,30,0.5);
+}
+
+.nav-pager .current a, .nav-prev-next a:hover {
+    background: #6cbdb5;
+    color: #fff;
+}
+
+ 
