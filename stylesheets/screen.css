@@ -114,6 +114,11 @@ li:last-child {
 	padding-bottom: 0;
 }
 
+pre {
+    font-family: Mono; 
+    margin-bottom: 20px;
+}
+
 /* System styles */
 
 #header, #footer {	
