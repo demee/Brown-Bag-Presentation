@@ -1,0 +1,185 @@
+
+
+
+
+
+JS GURUS
+=========
+mrdoob 
+http://mrdoob.com/
+
+Paul Irish 
+http://paulirish.com/
+
+Douglas Crockford
+http://www.crockford.com/
+
+John Resig
+http://ejohn.org/
+
+Christian Heilmann 
+http://christianheilmann.com/
+http://icant.co.uk/
+Worked for Yahoo, working on YQL & YUI, now working for Mozilla. 
+
+Prototypal Inheritance
+======================
+
+
+Closures
+========
+
+
+Event Loop
+==========
+http://stackoverflow.com/questions/3272298/whats-an-event-loop-and-how-is-it-different-than-using-other-models
+http://eventdrivenpgm.sourceforge.net/event_driven_programming.pdf
+http://www.csse.uwa.edu.au/cnet/eventdriven.html
+ 
+Coding Standards
+================
+http://coding.smashingmagazine.com/2011/12/12/an-introduction-to-object-oriented-css-oocss/
+http://www.starming.com/index.php?action=plugin&v=wave&tpl=union&ac=viewgrouppost&gid=1000003535&tid=13170 - 10 javascript mistakes
+http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf
+
+Agenda: 
+
+1. Javascript History 
+    * Javascript standards. 
+    http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf
+2. Advanced javascript topics: 
+    * Prototypal inheritance (how it's all linked)
+    * Closures (why it's so dynamic)
+    * Event loop (how it works)
+    * Coding Standards (how not to mess it all up)
+3. Javascript Gurus
+4. Quiz with prize. 
+
+Test questions: 
+http://blog.vjeux.com/2009/javascript/test-are-you-a-javascript-guru.html
+
+
+1] var result = [10] + 1;
+
+ [10, 1]
+ "101"
+ 11
+ 
+2] var result = ['a', 'b', 'c'] + "";
+
+ ['a', 'b', 'c', ""]
+ "abc"
+ "a,b,c"
+ 
+3] var result = 'a' + 5;
+
+ "f"
+ 5
+ "a5"
+ 
+Operations
+
+4] var result = 3.75 | 0;
+
+ 0
+ NaN
+ 3
+ 
+5] var result = 65 / 'a';
+
+ 1
+ 0
+ NaN
+ 
+Objects
+6] var ob = {"10": 1};
+ob[10] = 2;
+ob[[1, 0]] = 3;
+var result = ob["10"] + ob[10] + ob[[1, 0]];
+
+ 6
+ 7
+ 9
+ 
+7] var $ = {"": String};
+var result = !!$[([])]();
+
+ false
+ undefined
+ ":)"
+ 
+Equality
+8] var result = (' \t\r\n ' == 0);
+
+ true
+ false
+ 
+9] var a = new String("123");
+var b = "123";
+var result = (a === b);
+
+ true
+ false
+ 
+10] var a = {key: 1};
+var b = {key: 1};
+var result = (a == b);
+
+ true
+ false
+
+
+11] var result = ~~2.25
+2.25
+-2.25
+2
+
+
+19.	How do you put a message in the browser's status bar?
+
+	status("put your message here")
+	window.status = "put your message here"
+	window.status("put your message here")
+	statusbar = "put your message here"
+	
+Javascript Code standards
+=========================
+
+http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml
+
+
+http://www.google.com/reader/bundle/user%2F11165870484951445324%2Fbundle%2Ffrontend-standards%2Bbrowsers
+http://www.google.com/reader/bundle/user%2F11165870484951445324%2Fbundle%2Ffrontend
+
+
+
+
+We need to answer folowing questions: 
+
+- What's the best method of creating objects, for now we're using 4 different ones. 
+
+  * using Class({}) method
+  * using json-like object {}
+  * using function notation function(){ return {} }; 
+  * using prototype notation function a(); a.prototype = {}; 
+  
+  Do we need all of them, should we use just one? If we use all of them, where which method should be used?
+  
+- Shall we get rid of dotcom & dotcom2 from code base? 
+- Should we start using jQuery. If yes - how do we use jQuery. If no - why?
+- What's the widget in winston, is it piece of functionality, is it UI object, do we have standard API for widgets?
+
+
+AOL Global Operations Limited
+The Brunel Building
+Block 7A
+Heuston South Quarter
+Dublin 8
+Ireland
+
+
+0868111180
+
+
+julia@studiovariete.com
+julia@studoivariete.com
