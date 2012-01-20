@@ -5,6 +5,8 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <script type="text/javascript">(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script> 
     <link href="stylesheets/screen.css" type="text/css" rel="stylesheet" media="Screen,projection" />
+    <link href="stylesheets/colors-scheme-custom.css" type="text/css" rel="stylesheet" media="Screen,projection" />
+    <link href="scripts/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" media="screen,projection" />
   </head>
   <body>
     <div id="header">
@@ -16,7 +18,9 @@
     <div id="content">
       <div id="slides">
         <div class="slide">
+        	<br /><br /><br /><br /><br /><br />
             <center><h2>Javascript The Missing Parts</h2><center>
+            <br/>
             <center><h3>Slawomir Demichowicz</h3></center>
         </div>
         <div class="slide">
@@ -47,11 +51,20 @@
         
         <div class="slide">
           <h2>History</h2>
+          <ul>
+              <li>Initialy build by Netscape and called Moca</li>
+              <li>Later renamed to LiveScript and to compete with Java Netscape decided to change name to Javascript</li>
+              <li>The key design principles within JavaScript are taken from the Self and Scheme programming languages.</li>
+          </ul>
          
         </div>
         
         <div class="slide">
           <h2>Standard</h2>
+          <ul>
+              <li>Standard for JavaScript is called ECMAScript (and that's proper name of JavaScript)</li>
+              <li><a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf">http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf</a></li>
+          </ul>
         </div>
         
         <div class="slide">
@@ -65,8 +78,71 @@
         <div class="slide">
             <h2>Event Loop</h2>
         </div>
-        <div class="slide">
+        <div class="slide">            
             <h2>Coding Standards</h2>
+            <pre class="prettyprint lang-js">var button = { colour: "black", text: "OK" } //var button = new Object();
+button.state = function(state){ return this.state = state || this.state;}; 
+button.click = function(){ this.state("clicked"); };
+button.click();</pre>
+            
+            <pre class="prettyprint lang-js">function Button(colour, text){
+    this.colour = colour;
+    this.text = text;
+}
+Button.prototype.click = function(){ return this.colour }; 
+Button.prototype.state = function(state) { return this.state = state || this.state;}; 
+var button = new Button("black", "OK"); 
+button.click();</pre>
+            
+            <pre class="prettyprint lang-js">function bind(f, o){
+    return function(){
+        f.apply(o, arguments.slice(2, arguments.length)); 
+    }
+}
+
+
+var Button = (function(){
+
+    var Button = function(colour, text){
+        this.colour = colour;
+        this.text = text;
+        bind(_state, this); 
+    }
+
+    Button.prototype = {
+        click: function(){
+            _state("clicked");
+        }
+    }
+
+    var _state = function(state){
+        return this.state = state || this.state;
+    }
+
+    return Button; 
+}()); 
+
+var button = new Button(); 
+button.click();</pre>
+
+<pre class="prettyprint lang-js">var button = (function(){
+    var _colour = "black", 
+        _text = "OK", 
+        _stateValue, 
+        _state = function(state){
+            return _stateValue = state || _stateValue; 
+        }; 
+
+
+
+    return {
+        click: function(){
+            _state("clicked");
+        }
+    }
+
+}());</pre>
+            
         </div>
         
         <div class="slide">
@@ -89,5 +165,6 @@
     <script type="text/javascript" src="scripts/jquery.js"></script>
     <script type="text/javascript" src="scripts/jquery.presentation-full.js"></script>
     <script type="text/javascript" src="scripts/global.js"></script>
+    <script type="text/javascript" src="scripts/google-code-prettify/prettify.js"></script>
   </body>
 </html>
