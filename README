@@ -1,24 +1,64 @@
-A light-weight presentation plugin to use in place of Keynote or Powerpoint. Use the right and left keys, the previous & next links, or the actual page links to navigate through the slides.
+History
+=======
+http://javascript.about.com/od/reference/a/history.htm
+http://laktek.com/2012/01/19/different-flavors-of-javascript/
 
-Sample Usage:
+Prototypal Inheritance
+======================
+https://developer.mozilla.org/en/JavaScript/Guide/Inheritance_Revisited
+http://msdn.microsoft.com/en-us/scriptjunkie/ff852808
+http://msdn.microsoft.com/en-us/scriptjunkie/gg602402
+http://www.bit-101.com/blog/?p=3420
+http://dmitrysoshnikov.com/ecmascript/javascript-the-core/
+http://howtonode.org/707e1dc36fb542db3c3f0ea4609dc1cef819c960/object-graphs-3
 
-<div id="slides">
-  <div class="slide">
-    Slide 1
-  </div>
-  <div class="slide">
-    Slide 2
-  </div>
-  <div class="slide">
-    Slide 3
-  </div>
-</div>
+Closures
+========
+http://jibbering.com/faq/notes/closures/
 
-$('#slides').presentation({
-  slide: '.slide', //Reference to each individual slide
-  pagerClass: 'nav-pager', //Class to put on the unordered list that contains links to each slide
-  prevNextClass: 'nav-prev-next', //Class to put on the unordered list that contains the previous and next links
-  prevText: 'Previous', //Text for the Previous link
-  nextText: 'Next', //Text for the Next link
-  transition: 'fade' //Possible values are 'fade', 'show/hide', 'slide'
-});
+Event Loop
+==========
+http://stackoverflow.com/questions/3272298/whats-an-event-loop-and-how-is-it-different-than-using-other-models
+http://eventdrivenpgm.sourceforge.net/event_driven_programming.pdf
+http://www.csse.uwa.edu.au/cnet/eventdriven.html
+https://gist.github.com/1604969
+ 
+Coding Standards
+================
+http://coding.smashingmagazine.com/2011/12/12/an-introduction-to-object-oriented-css-oocss/
+http://www.starming.com/index.php?action=plugin&v=wave&tpl=union&ac=viewgrouppost&gid=1000003535&tid=13170 - 10 javascript mistakes
+http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf
+http://net.tutsplus.com/tutorials/javascript-ajax/from-jquery-to-javascript-a-reference/
+http://www.2ality.com/2011/04/ecmascript-5-spec-lexicalenvironment.html
+http://shichuan.github.com/javascript-patterns/
+
+QUIZ
+================
+http://uxebu.com/blog/2012/01/19/javascript-snippets-isarray-arguments-to-array-x-y-padding-array-unique/
+http://paynedigital.com/2012/01/combining-ajax-pushstate-and-css3-transitions
+http://www.devthought.com/2012/01/18/an-object-is-not-a-hash/
+
+INTERESTING STUFF
+=================
+http://blog.errorception.com/2012/01/writing-quality-third-party-js-part-2.html
+
+
+JS GURUS
+=========
+Douglas Crockford
+http://www.crockford.com/
+
+Paul Irish 
+http://paulirish.com/
+
+mrdoob 
+http://mrdoob.com/
+
+John Resig
+http://ejohn.org/
+
+Christian Heilmann 
+http://christianheilmann.com/
+http://icant.co.uk/
+http://christianheilmann.com/2011/12/29/what-i-did-in-2011-talk-archive-with-slides-recordings-and-videos/
+Worked for Yahoo, working on YQL & YUI, now working for Mozilla. 
