@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <title>JavaScript The Missing Parts</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <script type="text/javascript">(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script> 
+    <link href="stylesheets/screen.css" type="text/css" rel="stylesheet" media="Screen,projection" />
+    <link href="stylesheets/colors-scheme-custom.css" type="text/css" rel="stylesheet" media="Screen,projection" />
+    <link href="scripts/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  </head>
+  <body>
+    <div id="header">
+      <div class="container">
+        <h1>Javascript The Missing Parts</h1>
+      </div>
+    </div>
+       
+    <div id="content">
+      <div id="slides">
+        <div class="slide">
+        	<br /><br /><br /><br /><br /><br />
+            <center><h2>Javascript The Missing Parts</h2><center>
+            <br/>
+            <center><h3>Slawomir Demichowicz</h3></center>
+        </div>
+        <div class="slide">
+          <h2>About Me</h2>
+          <ul>
+            <li> I started as a C developer, but when started to build js interfaces for my poor quality C services I noticed that 
+            there was just much more to SHOW OFF than with C programs.</li>
+            <li> After that I was working with PHP & Javascript for almost 2 years.</li>
+            <li> I moved to Ireland and I'm programming mainly in javascript for last 4 years.</li>
+            <li> Currently I'm working in MapQuest UI which is the biggest UI project I worked on so far.</li>
+          </ul>
+        </div>
+        
+        <div class="slide">
+            <h2>Agenda</h2>
+            <ol>
+                <li>Javascript History</li>    
+                <li>Javascript standards <span class="small">(is there a standard for it? really?)</small></li>
+                <li>Prototypal inheritance (how it's all linked)</li>
+                <li>Closures (why it's so dynamic)</li>
+                <li>Event loop (how it works)</li>
+                <li>Coding Standards (how not to mess it all up)</li>
+                <li>Javascript Gurus (they lead the way)</li>
+                <li>Quiz with prize</li>
+            </ol>
+        </div>
+        
+        <div class="slide">
+          <h2>History</h2>          
+          <ul>
+              <li>The key design principles within JavaScript are taken from the Self and Scheme programming languages.</li>
+              <li>Initialy build as a side project of Brendan Eich in Netscape in 1995 and called "Mocha"</li>
+              <li>Shipped with Netscape Browser as a "LiveScript" and soon after renamed to "JavaScript"</li>
+              <li>Due to quick popularity Microsoft reverse engineered JavasScript and shipped it with name "JScript"</li>
+              <li>Netscape soon pushed JavaScript to ECMA International for standardization.</li>
+          </ul> 
+        </div>
+        <div class="slide">
+        <h2>Brendan Eich</h2>
+          <div class="fr">
+            <img src="images/BEich.jpg"><br/>
+            <small><a href="http://en.wikipedia.org/wiki/Brendan_Eich">Brendan Eich (Wikipedia)</a></small>
+          </div>
+          <cite>
+                JS had to “look like Java” only less so, be Java’s dumb kid brother or boy-hostage sidekick. Plus, I had to be done in ten days or something worse than JS would have happened.
+          </cite> — Brendan Eich
+    
+        </div>
+        <div class="slide">
+          <h2>Standards</h2>
+          <ul>
+              <li>First ECMA-262 standard was released in June 1997 (let's call it ES1)</li>
+              <li>While version 2 (ES2) was swiped under the carpet for minor updates, in 1999 ES3 was released</li>
+              <li>ES4 Abandoned (Adobe still use it for flash)</li>
+              <li>In 2009 ES5 - Big Change</li>
+              <li>June 2011 ES5.1, fixed and updated ES5</li>              
+              <li>ECMA is working on ES6 at the moment, codename "Homebrew"</li>
+          </ul>
+          <div class="source-box">
+             <a href="http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf">Ecma-262.pdf</a>
+             <a href="http://en.wikipedia.org/wiki/ECMAScript">ECMAScript on Wikipedia</a>
+             <a href="http://es5.github.com/">ES5 Standard English Version</a>
+          </div>
+        </div>        
+        
+        <div class="slide">
+          <h2>Prototypal inheritance</h2>
+          <cite style="margin-bottom: 20px; display:block"">JavaScript is a bit confusing for developers coming from Java or C++, as it's all dynamic, all runtime, and it has no classes at all. It's all just instances (objects). Even the "classes" we simulate are just a function object. <small>(Mozilla.org)</small></cite>          
+          <div style="color:#888;font-size:0.8em"> 
+            <img class="fr" src="images/PrototypeECMA.png" />CF is a constructor (and also an object). Five objects have been created by using new expressions: cf1, cf2, cf3, cf4, and cf5. Each of these objects contains properties named q1 and q2. The dashed lines represent the implicit prototype relationship; so, for example, cf3‘s prototype is CFp. The constructor, CF, has two properties itself, named P1 and P2, which are not visible to CFp, cf1, cf2, cf3, cf4, or cf5. The property named CFP1 in CFp is shared by cf1, cf2, cf3, cf4, and cf5 (but not by CF), as are any properties found in CFp‘s implicit prototype chain that are not named q1, q2, or CFP1. Notice that there is no implicit prototype link between CF and CFp.
+          </div>
+        </div>
+        
+        <div class="slide">
+          <h2>Prototypal inheritance (ES3)</h2>
+            <pre class="prettyprint lang-js">
+function Button() {
+    this.text = "Press Me";
+}
+
+function ToggleButton(toggle) {
+    this.toggle = toggle || "off";
+}
+
+ToggleButton.prototype = new Button; //prototype it's not a property, it's expression
+
+ToggleButton.prototype.toggle = function() {
+    if (this.toggle === "on") {
+        this.toggle = "off";
+    } else {
+        this.toggle = "on";
+    }
+}
+
+var toggleButton = new ToggleButton("off");
+var toggleButton2 = new ToggleButton("on"); //second instance of ToggleButton
+
+alert(toggleButton.text); //Toggle Button has Button property - alerts "Press Me"
+
+//extending prototype extends all instances (even though they are already created)
+ToggleButton.prototype.setToggleState = function(toggle){
+    this.toggle = toggle; 
+}
+
+toggleButton.setToggleState("on"); //works! 
+
+//we can also extend single instance 
+toggleButton.getToggleState = function(){ return this.toggle }; 
+toggleButton2.getToggleState(); //error! 
+
+
+</pre>
+        <div class="source-box">
+             <a href="https://developer.mozilla.org/en/JavaScript/Guide/Details_of_the_Object_Model">Details of the Object Model</a>
+        </div>
+        </div>
+        
+        <div class="slide">
+        <h2>Prototypal inheritance</h2>
+        <ul>
+            <li>ToggleButton.prototype --> Button.prototype --> Function.prototype --> Object.prototype</li>
+            <li>"Text".prototype --> String.prototype --> Object.prototype</li>
+            <li>1.prototype --> Number.prototype --> Object.prototype</li>
+            <li> null (no prototype), but: <pre class="prettyprint lang-js">typeof null //returns "object"</pre></li>
+            <li> undefined (no prototype) </li>
+        </ul>
+        </div>
+        
+         <div class="slide">
+          <h2>Prototypal inheritance (ES5)</h2>
+            <pre class="prettyprint lang-js">
+function Button(text){
+  this.text = text;
+}
+
+Button.prototype.click = function(){
+    alert("Clicked");
+}
+
+function ToggleButton(text, toggle){
+  Button.call(this, text); //calling constructor of super object (class)
+  this.toggle = toggle;
+}
+
+ToggleButton.prototype = Object.create(Button, {
+  toggle : { value: "off", enumerable: true, configurable: true, writable: true },
+  click : { value: function(){ // override function from super object (class)
+       Button.prototype.click.apply(this, arguments); // call super function
+          if(this.toggle === "on"){  this.toggle = "off";  } else { this.toggle = "on"; }
+          alert("Toggle " + this.toggle);
+    }, enumerable: true, configurable: true, writable: true }
+})
+
+var toggleButton = new ToggleButton();
+toggleButton.click(); //alerts "Clicked" and then "Toggle on" 
+            </pre>
+        </div>
+        
+        <div class="slide">
+        <h2>P. I. (drawback)</h2>
+        
+        
+        <pre class="prettyprint lang-html">
+&ltinput type="button" value="OK" /&gt
+&ltinput type="button" value="Cancel" /&gt
+&ltinput type="button" value="Exit" /&gt
+        </pre>
+        
+        <pre class="prettyprint lang-js">
+var buttons = document.querySelectorAll('input[type=button]');
+
+for(var i in buttons){ //buttons also contains "length" & "item"
+    if(buttons.hasOwnProperty(i)){
+        buttons[i].addEventListener("click", function(){
+            alert(buttons[i].value);
+        }, false);
+    }
+}
+        </pre>
+        </div>       
+        <div class="slide">
+            <h2>Closures (very simple example)</h2>
+            <pre class="prettyprint lang-js">
+function foo(x) {
+  var tmp = 3;
+  return function (y) {
+    alert(x + y + (++tmp));
+  }
+}
+var bar = foo(2); // bar is now a closure.
+bar(10); //alerts 16
+bar(10); //alert 17
+            </pre>
+            <small>(source: <a href="http://stackoverflow.com/questions/111102/how-do-javascript-closures-work">StackOverflow</a>)</small>
+        </div>
+        <div class="slide">
+            <h2>Closures (simple example)</h2>
+            <pre class="prettyprint lang-js">
+function Button(text){
+    this.text = text;
+    
+    var action = text + " clicked";
+    
+    function makeItClick(){     
+        alert(action);
+        
+        //alert(this.text); //wont work! this is a window
+    }
+    
+    this.click = makeItClick; 
+}            
+
+var button = new Button("My Button");
+button.click();            
+button.makeItClick(); //error!
+            </pre>
+        </div>
+        
+        <div class="slide">
+            <h2>Closures (example)</h2>
+                <pre class="prettyprint lang-html">
+&ltinput type="button" value="OK" /&gt
+&ltinput type="button" value="Cancel" /&gt
+&ltinput type="button" value="Exit" /&gt
+                </pre>
+            <pre class="prettyprint lang-js">
+var buttons = document.querySelectorAll('input[type=button]');
+
+for(var i in buttons){ //buttons also contains "length" & "item"
+    if(buttons.hasOwnProperty(i)){
+        buttons[i].addEventListener("click", (function(button){
+            return function(){
+                alert(button.value);
+            }
+        }(buttons[i])), false);
+    }
+}
+            </pre>
+        </div>
+        
+        <div class="slide">
+            <h2>Closures (complex example)</h2>
+            <pre class="prettyprint lang-js">
+var memoizer = function (memo, fundamental) {
+    var shell = function (n) {
+        var result = memo[n];
+        if (typeof result !== 'number') {
+            result = fundamental(shell, n);
+            memo[n] = result;
+        }
+        return result;
+    };
+    return shell;
+};
+
+//We can now define fibonacci with the memoizer, providing the initial memo array and fundamental function:
+
+var fibonacci = memoizer([0, 1], function (test, n) {
+    return test(n - 1) + test(n - 2);
+});
+            </pre>
+            <small>(source: <a href="http://stackoverflow.com/questions/2660912/javascript-closure-questions">StackOverflow</a>)</small>
+        </div>
+        <div class="slide">
+            <h2>Event Loop</h2>
+            <ul>
+                <li>JavaScript is single threaded. Period.</li>
+                <li>Although you can still suffer some of the issues of concurrent programming (mainly race conditions) </li>
+                <li>setTimeout/setInterval, (XHR), onload events and UI events (click, focus, etc.) provide a crude impression of multi-threadedness </li>               
+                <li>Think about Event Loop as a queue of jobs to do, it's important not to overload it with heavy items</li>
+                <li>Exact moment of events in event loop being processed it's not guaranteed </li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Event Loop (example)</h2>
+            <pre class="prettyprint lang-js">
+        
+function Button(text){
+    this.text = text;
+}
+
+Button.prototype.click = function(){
+    var self = this;
+    
+    Ajax.get("http://myservice.com/data", self.xhr);
+    
+    self.text = "Waiting...";
+    
+    window.setTimeout(function(){
+        self.text = "Still waiting...";     
+    }, 50);
+   
+    
+};
+
+Button.prototype.xhr = function(){
+    this.text = "Recived data!";
+};
+
+
+var button = new Button("Get data!");
+   
+button.click();
+            </pre>
+         </div>
+    
+         <div class="slide">
+            <h2>Event Loop</h2>
+            <img src="images/drawing.png" height="400px;"/>
+        </div>
+        <div class="slide">
+            <h2>Coding Standards</h2>
+            <h3>Object literal</h3>
+            <pre class="prettyprint lang-js">
+var button = new Object(); //{}
+button.text = "OK";
+button.setText = function(text){ this.text = text }; 
+button.click = function(){ this.setText("Clicked") }
+</pre>
+Or even simpler: 
+<pre class="prettyprint lang-js">
+var button = { 
+    text: "OK", 
+    setText: function(text){
+        this.text = text; 
+    }, 
+    click: function(){
+        this.setText("Clicked"); 
+    }
+};
+</pre>
+        <ul>
+            <li>Instance created in place.</li>
+            <li>Cannot use "new" to create new objects.</li>
+            <li>Good way of creating singletons with only public properties.</li>
+        </ul>
+        </div>
+        <div class="slide">
+        <h2>Coding Standards</h2>
+        <h3>Prototype way</h3>
+            <pre class="prettyprint lang-js">
+function Button(text){
+    this.text = text;
+}
+
+Button.prototype.click = function(){ 
+    this.setText("clicked"); 
+};
+
+Button.prototype.setText = function(text) { 
+    this.text = text;
+}; 
+var button = new Button("OK"); 
+button.click();</pre>
+        <ul>
+            <li>Multiple instances can be created using "new"</li>
+            <li>Impossible to hide implementation</li>
+        </ul>        
+        </div>
+        <div class="slide">
+        <h2>Coding Standards</h2>
+        <h3>Module & hiding implementation</h3>
+<pre class="prettyprint lang-js">
+var button = (function(){
+    var _text = "OK", 
+    _setText = function(text){
+        _text = text; 
+    }; 
+
+    return {
+        click: function(){
+            _setText("Clicked");
+        }
+    };
+}());
+
+button.click();
+button._setText("Clicked"); //error
+</pre>
+        <ul>
+            <li>Returns implementation in place crating singleton object</li>
+            <li>Similar to Object literal, but allows to hide implementation</li>
+        </ul>
+        </div>
+        <div class="slide">
+            <h2>Coding Standards</h2>
+            <h3>Module & hiding implementation & re-usable code </h3>
+            <pre class="prettyprint lang-js">
+var Button = function(text){
+    var _text = text, 
+    _setText = function(text){
+        _text = text; 
+    }; 
+
+    return {
+        click: function(){
+            _setText("Clicked");
+        }
+    };
+};
+
+var button = Button("OK"); 
+butotn.click(); 
+button._setText("Clicked"); //error
+</pre>
+<ul>
+    <li> Allows to create multiple instances with hidden implementation</li>
+    <li> Do Not use "new" to create new instance (will return window)</li>
+</ul>
+</div>
+        <div class="slide">
+            <h2>Javascript Gurus (G1)</h2>
+            <h3>Douglas Crockford</h3>
+            <img src="images/crockford.jpg" class="fr" />
+            <ul>
+                <li><a href="http://www.crockford.com/">http://www.crockford.com/</a></li>
+                <li>Works for Yahoo & ECMA</li>
+                <li>Has great impact on JS community and JS popularity</li>
+                <li>Author of great book "Javascript The Good Parts"</li>
+                <li>Author of JSLint</li>
+                <li>Also invented JSON</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Javascript Gurus (G2)</h2>
+            <h3>Paul Irish</h3>
+            <img src="images/paul.jpg" class="fr" />
+            <ul>
+                <li><a href="http://paulirish.com/">http://paulirish.com/</a></li>
+                <li>JavaScript Evangelist, Blogger</li>
+                <li>Author of HTML5 boilerplate</li>
+                <li>Author of HTML5/CSS3 feature detection library Moderinzr</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Javascript Gurus (G3)</h2>
+            <h3>Mr. doob (a.k.a. Ricardo Cabello)</h3>
+            <img src="images/mrdoob.jpeg" class="fr" />
+            <ul>
+                <li> <a href="http://mrdoob.com/">http://mrdoob.com</a></li>
+                <li> Author of astonishing library tree.js</li>
+                <li> He has big impact on javascript demo scene</li>
+                <li> WebGL fan, Blogger</li>
+                <li> Really communicative guy, you can grab him on irc and ask anything </li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Javascript Gurus (G4)</h2>
+            <h3>John Resig</h3>
+            <img src="images/johnresig.jpg" class="fr" />
+            <ul>
+                <li><a href="http://ejohn.org/">http://ejohn.org/</a></li>
+                <li>Author of jQuery</li>
+                <li>Javascript Evangelist, Blogger</li>
+                <li>Author of "Javascript Ninja" Book</li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Javascript Gurus (G5)</h2>
+            <h3>Christian Heilmann</h3>
+            <img src="images/chris.jpg" class="fr" />
+            <ul>
+                <li><a href="http://christianheilmann.com/">http://christianheilmann.com/</a></li>
+                <li>HTML5 Evangelist</li>
+                <li>He has made loads of speeches around the word</li>
+                <li>Worked for Yahoo, working on YQL & YUI, now working for Mozilla. </li>
+            </ul>
+        </div>
+        <div class="slide">
+            <h2>Quiz (rules)</h2>
+            <ul>
+                <li>Communication with other people allowed</li>
+                <li>Using all electronic devices, Wikipedia and JavaScript interpreters allowed</li>
+                <li>People on the phone or video should send answers to slawomir.demichowicz@temaol.com, before answers are displayed</li>
+                <li>Crossing out answers and changing your mind is NOT ALLOWED </li>
+                <li>There is just one prize, so eventually we may end up doing draw form the best answers (if any)</li>
+            </ul>
+        </div>
+         <div class="slide">            
+            <h3>1. The following code could be optimized further in order to:</h3>
+            <pre class="prettyprint lang-js">
+var buttons = document.querySelectorAll('input[type=button]');
+
+for(var i in buttons){ //buttons also contains "length" & "item"
+    if(buttons.hasOwnProperty(i)){
+        buttons[i].addEventListener("click", (function(button){
+            return function(){
+                alert(button.value);
+            }
+        }(buttons[i])), false);
+    }
+}
+            </pre>
+            <li>a) Improve memory consumption </li>
+            <li>b) Improve performance </li>
+            <li>c) Improve code readability </li>
+        </div>
+        <div class="slide">        
+        <h3>2. Does the following code solve race-condition problem?</h3>
+        <pre class="prettyprint lang-js">
+function Button(text){ this.text = text; }
+
+Button.prototype.click = function(){
+    var self = this;    
+    Ajax.get("http://myservice.com/data", self.xhr);    
+    self.dataTimeout = window.setTimeout(function(){ self.text = "Still waiting..."; }, 50);
+    self.text = "Waiting...";
+};
+
+Button.prototype.xhr = function(){
+    var self = this;
+    window.clearTimeout(self.dataTimeout);
+    self.text = "Recived data!";
+};
+var button = new Button("Get data!");
+button.click();             
+        </pre>
+        <ul>
+            <li>a) Yes</li>
+            <li>b) No</li>
+            <li>c) Yes if we increase timeout form 50ms to at least 100ms</li>
+        </ul>
+        </div>
+         <div class="slide">
+        <h3>3. In order to create instance of the following module programmer should write:</h3>
+         <pre class="prettyprint lang-js">
+var Button = function(text){
+    var _text = text, 
+        _self = {},
+        _setText = function(text){
+            _text = text; 
+        }; 
+
+    _self.click = function(){
+        _setText("Clicked");
+    }; 
+    
+    return _self; 
+};
+</pre>
+        <ul>
+            <li>a) var button = new Button("OK");</li>
+            <li>b) var button = Button("OK");</li>
+            <li>c) Button is already final, desired object and contains "click" function</li>
+        </ul>
+        </div>
+        <div class="slide">
+            <h2>Quizz (answers)</h2>
+            <li>Q1: A</li>
+            <li>Q2: A</li>
+            <li>Q3: B</li>
+        </div>
+      </div>
+    </div>
+
+       
+    
+    <div id="footer">
+      <div class="container">
+        jQuery presenation plugin by Trevor Davis Viget Labs
+      </div>
+    </div>
+    <script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/jquery.presentation-full.js"></script>
+    <script type="text/javascript" src="scripts/global.js"></script>
+    <script type="text/javascript" src="scripts/google-code-prettify/prettify.js"></script>
+  </body>
+</html>
