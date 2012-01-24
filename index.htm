@@ -489,7 +489,92 @@ button._setText("Clicked"); //error
                 <li>Worked for Yahoo, working on YQL & YUI, now working for Mozilla. </li>
             </ul>
         </div>
-        
+        <div class="slide">
+            <h2>Quiz (rules)</h2>
+            <ul>
+                <li>Communication with other people allowed</li>
+                <li>Using all electronic devices, Wikipedia and JavaScript interpreters allowed</li>
+                <li>People on the phone or video should send answers to slawomir.demichowicz@temaol.com, before answers are displayed</li>
+                <li>Crossing out answers and changing your mind is NOT ALLOWED </li>
+                <li>There is just one prize, so eventually we may end up doing draw form the best answers (if any)</li>
+            </ul>
+        </div>
+         <div class="slide">            
+            <h3>1. The following code could be optimized further in order to:</h3>
+            <pre class="prettyprint lang-js">
+var buttons = document.querySelectorAll('input[type=button]');
+
+for(var i in buttons){ //buttons also contains "length" & "item"
+    if(buttons.hasOwnProperty(i)){
+        buttons[i].addEventListener("click", (function(button){
+            return function(){
+                alert(button.value);
+            }
+        }(buttons[i])), false);
+    }
+}
+            </pre>
+            <li>a) Improve memory consumption </li>
+            <li>b) Improve performance </li>
+            <li>c) Improve code readability </li>
+        </div>
+        <div class="slide">        
+        <h3>2. Does the following code solve race-condition problem?</h3>
+        <pre class="prettyprint lang-js">
+function Button(text){ this.text = text; }
+
+Button.prototype.click = function(){
+    var self = this;    
+    Ajax.get("http://myservice.com/data", self.xhr);    
+    self.dataTimeout = window.setTimeout(function(){ self.text = "Still waiting..."; }, 50);
+    self.text = "Waiting...";
+};
+
+Button.prototype.xhr = function(){
+    var self = this;
+    window.clearTimeout(self.dataTimeout);
+    self.text = "Recived data!";
+};
+var button = new Button("Get data!");
+button.click();             
+        </pre>
+        <ul>
+            <li>a) Yes</li>
+            <li>b) No</li>
+            <li>c) Yes if we increase timeout form 50ms to at least 100ms</li>
+        </ul>
+        </div>
+         <div class="slide">
+        <h3>3. In order to create instance of the following module programmer should write:</h3>
+         <pre class="prettyprint lang-js">
+var Button = function(text){
+    var _text = text, 
+        _self = {},
+        _setText = function(text){
+            _text = text; 
+        }; 
+
+    _self.click = function(){
+        _setText("Clicked");
+    }; 
+    
+    return _self; 
+};
+</pre>
+        <ul>
+            <li>a) var button = new Button("OK");</li>
+            <li>b) var button = Button("OK");</li>
+            <li>c) Button is already final, desired object and contains "click" function</li>
+        </ul>
+        </div>
+        <div class="slide">
+            <h2>Quizz (answers)</h2>
+            <li>Q1: A</li>
+            <li>Q2: A</li>
+            <li>Q3: B</li>
+        </div>
+      </div>
+    </div>
 
        
     
