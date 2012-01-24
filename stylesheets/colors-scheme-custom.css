@@ -9,6 +9,12 @@ h2 {
 	text-shadow: 2px 2px 2px #FFFDF6, 2px 2px 2px #FFFDF6, 0px 0px 4px #fff;
 }
 
+h3 {
+    color: #787878;
+    text-shadow: 0px 2px 3px #FFFDF6;
+  
+}
+
 li {
     border-bottom: 1px solid #62B095;
 }
